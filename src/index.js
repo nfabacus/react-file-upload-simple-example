@@ -14,6 +14,10 @@ function App() {
     console.log("submitted!");
   };
 
+  const onHandleClick = () => {
+    window.navigator.msSaveBlob(selectedFile, "myFile.csv");
+  };
+
   const handleChange = e => {
     const file = e.target.files[0];
     console.log("file type>>>", file.type);
@@ -48,7 +52,10 @@ function App() {
         />
         <button type="submit">Submit</button>
       </form>
-      {selectedFile && (
+      {window.navigator.msSaveBlob && selectedFile && (
+        <button onClick={onHandleClick}>download</button>
+      )}
+      {!window.navigator.msSaveBlob && selectedFile && (
         <a href={selectedFile} download="myFile.csv">
           Download this
         </a>
